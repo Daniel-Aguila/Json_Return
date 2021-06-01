@@ -19,9 +19,24 @@ def index():
     lines = file.read()
     lines = lines[:-1]
 
+    data = []
+    for line in lines.splitlines():
+        data.append(line)
+
+    json_write = {
+        "data": data,
+        "error": "error string"
+    }
+
+    json_object = json.dumps(json_write)
+    file.close()
+
+    return json_object
+
+
 def main():
     saveData("https://gist.githubusercontent.com/marshyski/d5839816c2ea730185b0af3570cbc2f7/raw/d6aebfc3f0c202b17fe6b27aae023297d9ba6a67/sentences.json")
     index()
+
 if __name__ == "__main__":
     main()
-
