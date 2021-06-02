@@ -39,7 +39,6 @@ def index():
 
 def Search(string_):
     json_data = index()
-    print(json_data)
 
     #by using upper() we can make it case insensitive since Dinner would be the same word as dinner
     wanted_word = string_.upper()
@@ -47,16 +46,15 @@ def Search(string_):
 
     dict = {}
     for sentence in json_data['data']:
-        myList = []
         for word in sentence.split():
             #remove special characters so for example "dinner." is now "dinner"
             #using regex
             word = re.sub('[^A-Za-z0-9]+', '', word).upper()
             if(wanted_word == word):
                 count_of_word_per_sentence += 1
-        myList.append(count_of_word_per_sentence)
+
+        dict[sentence] = count_of_word_per_sentence
         count_of_word_per_sentence = 0
-        dict[sentence] = myList
 
         #Sorts the dictionary and reverses the order since the instructions said the first should have the most multiple of a word
         sorted_dict = sorted(dict.items(),key=lambda x:x[1], reverse=True)
