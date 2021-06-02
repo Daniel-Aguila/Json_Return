@@ -39,14 +39,14 @@ def index():
 
 def search(string_):
     json_data = index()
+
+    #by using upper() we can make it case insensitive since Dinner would be the same word as dinner
     wanted_word = string_.upper()
     count_of_word_per_sentence = 0
 
     dict = {}
-    count = 0
     for sentence in json_data['data']:
         myList = []
-        count+=1
         for word in sentence.split():
             #remove special characters so for example "dinner." is now "dinner"
             word = re.sub('[^A-Za-z0-9]+', '', word).upper()
@@ -55,19 +55,20 @@ def search(string_):
         myList.append(count_of_word_per_sentence)
         count_of_word_per_sentence = 0
         dict[sentence] = myList
-
+        
+        #Sorts the dictionary and reverses the order since the instructions said the first should have the most multiple of a word
         sorted_dict = sorted(dict.items(),key=lambda x:x[1], reverse=True)
 
+    #create a new list where we keep only the keys from the dictionary already in the correct order
     data = []
     for key, value in sorted_dict:
         data.append(key)
+
     json_write = {
         "results": data,
         "error": "error string"
     }
 
-    #create a json string and then a json object
-    #json loads returns an object from a json representing string
     json_string = json.dumps(json_write)
     json_object = json.loads(json_string)
 
@@ -79,5 +80,6 @@ def main():
     print(search("In"))
     print(search("dinner"))
     print(search("Dinner"))
+
 if __name__ == "__main__":
     main()
