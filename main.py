@@ -39,6 +39,7 @@ def index():
 
 def Search(string_):
     json_data = index()
+    print(json_data)
 
     #by using upper() we can make it case insensitive since Dinner would be the same word as dinner
     wanted_word = string_.upper()
@@ -56,7 +57,7 @@ def Search(string_):
         myList.append(count_of_word_per_sentence)
         count_of_word_per_sentence = 0
         dict[sentence] = myList
-        
+
         #Sorts the dictionary and reverses the order since the instructions said the first should have the most multiple of a word
         sorted_dict = sorted(dict.items(),key=lambda x:x[1], reverse=True)
 
@@ -86,6 +87,8 @@ def main():
 if __name__ == "__main__":
     main()
 
+#A way we can improve the solution is by doing multithreading or multiprocesses since we are going through every sentence in the the "sentences", I can create a multithreading function to have them all being checked at the same time
+#saving so much time on the solution instead of waiting one by one.
 #At the moment the program does not distinguish between I and I've. Althought the word "I" is technically in I've = "I have". Another way we can improve the program
-#is to create a try and catch safety addition. In case one inputs a number in the Search function, and since the Search function only takes in a string, having an int variable
+#is to create a try and catch safety addition for example in the case one inputs a number in the Search function, since the Search function only takes in a string, having an int variable
 #will produce errors. We can add a try and catch to catch all the exceptions that could make it crash.
