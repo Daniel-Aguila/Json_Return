@@ -1,7 +1,6 @@
 import json
 from urllib.request import urlopen
 import re
-import collections
 
 def saveData(json_url):
     json_object = urlopen(json_url) #gets the json object from the http request
@@ -18,6 +17,7 @@ def saveData(json_url):
 def index():
     file = open("local.txt", "r")
     lines = file.read()
+    #since in the text the last line is empty
     lines = lines[:-1]
 
     data = []
@@ -37,7 +37,7 @@ def index():
 
     return json_object
 
-def search(string_):
+def Search(string_):
     json_data = index()
 
     #by using upper() we can make it case insensitive since Dinner would be the same word as dinner
@@ -76,10 +76,10 @@ def search(string_):
 
 def main():
     saveData("https://gist.githubusercontent.com/marshyski/d5839816c2ea730185b0af3570cbc2f7/raw/d6aebfc3f0c202b17fe6b27aae023297d9ba6a67/sentences.json")
-    print(search("we"))
-    print(search("In"))
-    print(search("dinner"))
-    print(search("Dinner"))
+    print(Search("we"))
+    print(Search("In"))
+    print(Search("dinner"))
+    print(Search("Dinner"))
 
 if __name__ == "__main__":
     main()
