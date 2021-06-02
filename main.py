@@ -49,6 +49,7 @@ def Search(string_):
         myList = []
         for word in sentence.split():
             #remove special characters so for example "dinner." is now "dinner"
+            #using regex
             word = re.sub('[^A-Za-z0-9]+', '', word).upper()
             if(wanted_word == word):
                 count_of_word_per_sentence += 1
@@ -76,10 +77,15 @@ def Search(string_):
 
 def main():
     saveData("https://gist.githubusercontent.com/marshyski/d5839816c2ea730185b0af3570cbc2f7/raw/d6aebfc3f0c202b17fe6b27aae023297d9ba6a67/sentences.json")
-    print(Search("we"))
-    print(Search("In"))
-    print(Search("dinner"))
-    print(Search("Dinner"))
+    #Test case 1 print(Search("we"))
+    #Test case 2 print(Search("IN"))
+    #Test case 3 print(Search("dinner"))
+    #Test case 4 print(Search("DiNner"))
+    #Test case 5 print(Search("I"))
 
 if __name__ == "__main__":
     main()
+
+#At the moment the program does not distinguish between I and I've. Althought the word "I" is technically in I've = "I have". Another way we can improve the program
+#is to create a try and catch safety addition. In case one inputs a number in the Search function, and since the Search function only takes in a string, having an int variable
+#will produce errors. We can add a try and catch to catch all the exceptions that could make it crash.
